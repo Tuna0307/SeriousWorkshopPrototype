@@ -32,6 +32,7 @@ public class InteractionZone : MonoBehaviour
         if (currentInteractable != null)
         {
             currentInteractable.Interact();
+            currentInteractable = null;
         }
             
     }
