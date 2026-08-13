@@ -36,7 +36,10 @@ public class PlayerController : MonoBehaviour
         inputActions.Disable();
     }
     void Update()
+
     {
+        if(GameManager.Instance.GetGameState() != GameState.Playing)
+            return;
         moveInput = inputActions.Player.Move.ReadValue<Vector2>();
 
         //Debug.Log("The Current input are X: "+ moveInput.x + "y:" + moveInput.y);
