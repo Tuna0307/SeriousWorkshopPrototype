@@ -51,11 +51,11 @@ public class PlayerController : MonoBehaviour
         
         if(movement.magnitude > 0.1f)
         {
-            animator.SetBool("ismoving",true);
+            animator.SetBool("isMoving", true);
         }
-
-        else{
-            animator.SetBool("ismoving",false);
+        else
+        {
+            animator.SetBool("isMoving", false);
         }
         
 
