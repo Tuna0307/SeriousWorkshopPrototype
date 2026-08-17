@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     private InputSystem_Actions inputActions;
     private Rigidbody rb;
     //private CharacterController controller;
+    private Animator animator;
     
     //movement actions
     private Vector2 moveInput;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
         inputActions = new InputSystem_Actions();
         //controller = GetComponent<CharacterController>();
         rb = GetComponent<Rigidbody>();
+
+        animator = GetComponent<Animator>();
     }
     void OnEnable()
     {
@@ -45,19 +48,16 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("The Current input are X: "+ moveInput.x + "y:" + moveInput.y);
 
         movement = new Vector3(moveInput.x, 0f, moveInput.y);
-        /*
+        
         if(movement.magnitude > 0.1f)
         {
-            //transform.Translate(movement * moveSpeed * Time.deltaTime);
-
-            //Movement Via Character Controller
-            //controller.Move(movement * moveSpeed * Time.deltaTime);
-
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime );
+            animator.SetBool("ismoving",true);
         }
-        */
+
+        else{
+            animator.SetBool("ismoving",false);
+        }
+        
 
         if(inputActions.Player.Interact.WasPressedThisFrame())
         {
@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour
             moveInput.y * moveSpeed);
 
         Quaternion targetRotation = Quaternion.LookRotation(movement);
+
+        rb.angularVelocity = Vector3.zero;
+
 
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime );
        }
