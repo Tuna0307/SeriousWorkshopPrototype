@@ -31,10 +31,14 @@ public class GameManager : MonoBehaviour
     public void AddWaste()
     {
         collectedWaste++;
+
+        AudioManager.Instance.PlayPickupSound();
         //Debug.Log("Waste collected current count" + collectedWaste);
         if(collectedWaste >= requiredWaste)
         {
             SetGameState(GameState.Win);
+            AudioManager.Instance.PlayWinningSound();
+            AudioManager.Instance.StopBackgroundMusic();
             uiManager.ShowWinPanel();
             
         }
